@@ -3,7 +3,7 @@ $("#refresh").click(function() {
   getFood($foodCodeSelection, "en");
 });
 
-function getFood(id, lang) {
+var getFood = (id, lang) => {
   var base = "https://food-nutrition.canada.ca";
   var uri =
     base + "/api/canadian-nutrient-file/food/?lang=" + lang + "&id=" + id;
@@ -12,18 +12,39 @@ function getFood(id, lang) {
     type: "GET",
     Accept: "application/json",
     dataType: "json"
-  }).then(function(data) {
+  }).then(data => {
     clearTable();
     displayFood(data);
   });
   //return;
-}
+};
 
-function clearTable() {
+var getNutrientAmount = (id, lang) => {
+  var base = "https://food-nutrition.canada.ca";
+  var uri =
+    base +
+    "/api/canadian-nutrient-file/nutrientamount/?lang=" +
+    lang +
+    "&id=" +
+    id;
+  $.ajax({
+    url: uri,
+    type: "GET",
+    Accept: "application/json",
+    dataType: "json"
+  }).then(data => {
+    console.log(data);
+    clearTable();
+    displayNutrient(data);
+    //return
+  });
+};
+
+var clearTable = () => {
   $("tbody").html("");
-}
+};
 
-function displayFood(data) {
+var displayFood = data => {
   for (var row = 0; row < data.length; row++) {
     var $tr = $("<tr>");
     var $foodCodeData = $("<td>");
@@ -34,4 +55,4 @@ function displayFood(data) {
     $tr.append($foodDescriptionData);
   }
   $("tbody").append($tr);
-}
+};

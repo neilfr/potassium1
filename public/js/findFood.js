@@ -3,7 +3,7 @@ $("#refresh").click(function() {
   getFood($foodCodeSelection, "en");
 });
 
-function getFood(id, lang) {
+var getFood = (id, lang) => {
   var base = "https://food-nutrition.canada.ca";
   var uri =
     base + "/api/canadian-nutrient-file/food/?lang=" + lang + "&id=" + id;
@@ -12,18 +12,18 @@ function getFood(id, lang) {
     type: "GET",
     Accept: "application/json",
     dataType: "json"
-  }).then(function(data) {
+  }).then(data => {
     clearTable();
     displayFood(data);
   });
   //return;
-}
+};
 
-function clearTable() {
+var clearTable = () => {
   $("tbody").html("");
-}
+};
 
-function displayFood(data) {
+var displayFood = data => {
   for (var row = 0; row < data.length; row++) {
     var $tr = $("<tr>");
     var $foodCodeData = $("<td>");
@@ -34,4 +34,4 @@ function displayFood(data) {
     $tr.append($foodDescriptionData);
   }
   $("tbody").append($tr);
-}
+};
