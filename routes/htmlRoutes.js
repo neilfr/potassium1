@@ -15,4 +15,10 @@ router.get("/findFood", function(req, res, next) {
   res.sendFile(path.join(__dirname, "../public/findFood.html"));
 });
 
+/* GET findNutrient page. */
+router.get("/findNutrient", function(req, res, next) {
+  //res.render("findNutrient", { title: "findNutrient" });
+  res.sendFile(path.join(__dirname, "../public/findNutrient.html"));
+});
+
 module.exports = router;
